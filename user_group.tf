@@ -1,9 +1,9 @@
-resource "aws_iam_group" "that" {
+resource "aws_iam_group" "example" {
   name = "admin-shrade"
   path = "/admin/"
 }
 
-resource "aws_iam_policy" "that" {
+resource "aws_iam_policy" "example" {
   name        = "shrade-policy"
   description = "Example IAM policy for my user group"
   policy      = <<EOF
