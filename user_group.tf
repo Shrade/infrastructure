@@ -19,3 +19,8 @@ resource "aws_iam_policy" "example" {
 }
 EOF
 }
+
+resource "aws_iam_group_policy_attachment" "example" {
+  group      = aws_iam_group.example.name
+  policy_arn = aws_iam_policy.example.arn
+}
