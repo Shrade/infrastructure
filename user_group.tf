@@ -4,7 +4,7 @@ resource "aws_iam_group" "that" {
 }
 
 resource "aws_iam_policy" "that" {
-  name        = "my-user-group-policy"
+  name        = "shrade-policy"
   description = "Example IAM policy for my user group"
   policy      = <<EOF
 {
@@ -20,16 +20,7 @@ resource "aws_iam_policy" "that" {
 EOF
 }
 
-resource "aws_iam_user" "shrade_general" {
-  name = "shrade-general"
-}
-
 resource "aws_iam_group_policy_attachment" "that" {
   group      = aws_iam_group.that.name
-  policy_arn = aws_iam_policy.that.arn
-}
-
-resource "aws_iam_user_policy_attachment" "that" {
-  user      = aws_iam_user.shrade_general.name
   policy_arn = aws_iam_policy.that.arn
 }
