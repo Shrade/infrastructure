@@ -3,7 +3,7 @@ resource "aws_iam_group" "that" {
   path = "/admin/"
 }
 
-resource "aws_iam_policy" "example" {
+resource "aws_iam_policy" "that" {
   name        = "my-user-group-policy"
   description = "Example IAM policy for my user group"
   policy      = <<EOF
