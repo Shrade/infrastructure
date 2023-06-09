@@ -21,6 +21,6 @@ EOF
 }
 
 resource "aws_iam_group_policy_attachment" "that" {
-  group      = aws_iam_group.that.name
-  policy_arn = aws_iam_policy.that.arn
+  group      = aws_iam_group.example.name
+  policy_arn = aws_iam_policy.example.arn
 }
