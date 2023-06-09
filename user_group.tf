@@ -7,17 +7,17 @@ resource "aws_iam_policy" "that" {
   name        = "user_policy"
   description = "Example IAM policy for my user group"
   policy      = <<EOF
-                {
-                "Version": "2012-10-17",
-                "Statement": [
-                    {
-                    "Effect": "Allow",
-                    "Action": "*",
-                    "Resource": "*"
-                    }
-                ]
-                }
-                EOF
+{
+"Version": "2012-10-17",
+"Statement": [
+    {
+    "Effect": "Allow",
+    "Action": "*",
+    "Resource": "*"
+    }
+]
+}
+EOF
 }
 
 resource "aws_iam_user" "shrade_general" {
