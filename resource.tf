@@ -1,6 +1,7 @@
 locals {
   environment = var.environment
 }
+
 /* 
 provider "aws" {
   region     = var.aws_region
@@ -17,6 +18,19 @@ resource "aws_vpc" "this" {
   enable_dns_support = true
   tags = {
     Name = "data-shrade"
+  }
+}
+
+resource "aws_security_group" "this" {
+  vpc_id = aws_vpc.this.id
+  name   = "shrade"
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 }
 
@@ -113,6 +127,9 @@ resource "aws_iam_user_policy_attachment" "data_titan_ecr_attach" {
 resource "aws_instance" "shrade_ec2" {
   ami           = "ami-067d12e172891a3e4"
   instance_type = "t2.micro" 
+
+  vpc_security_group_ids = [aws_security_group.this.id]
+  subnet_id = aws_subnet.private.id[0]
   tags = {
     Name = "shrade_ec2"
   }
