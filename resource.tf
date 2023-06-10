@@ -23,11 +23,17 @@ resource "aws_subnet" "public" {
   cidr_block              = local.subnets_public_private[0][count.index]
   availability_zone       = data.aws_availability_zones.this.names[count.index]
   map_public_ip_on_launch = true
+  tags = {
+    Name = "public"
+  }
 }
 
-/* resource "aws_subnet" "private" {
+resource "aws_subnet" "private" {
   count             = length(local.subnets_public_private[1])
   vpc_id            = aws_vpc.this.id
   cidr_block        = local.subnets_public_private[1][count.index]
   availability_zone = data.aws_availability_zones.this.names[count.index]
-} */
+  tags = {
+    Name = "private"
+  }
+}
