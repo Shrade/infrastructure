@@ -109,3 +109,11 @@ resource "aws_iam_user_policy_attachment" "data_titan_ecr_attach" {
   user       = aws_iam_user.shrade_ecr.name
   policy_arn = aws_iam_policy.shrade_ecr.arn
 }
+
+resource "aws_instance" "shrade_ec2" {
+  ami           = "ami-0c94855ba95c71c99"
+  instance_type = "t2.micro" 
+  tags = {
+    Name = "shrade_ec2"
+  }
+}
