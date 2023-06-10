@@ -37,3 +37,8 @@ resource "aws_subnet" "private" {
     Name = "private"
   }
 }
+
+module "s3_artifact" {
+  source = "./s3"
+  bucket_name = "${local.environment}-shrade"
+}
