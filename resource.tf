@@ -16,3 +16,11 @@ locals {
     length(data.aws_availability_zones.this.names),
   )
 }
+
+resource "aws_subnet" "public" {
+  count                   = length(local.subnets_public_private[0])
+  vpc_id                  = aws_vpc.this.id
+  cidr_block              = local.subnets_public_private[0][count.index]
+  availability_zone       = data.aws_availability_zones.this.names[count.index]
+  map_public_ip_on_launch = true
+}
