@@ -3,7 +3,7 @@ variable "environment" {
   default = "production"
 }
 
-variable "aws_access_key" {
+/* variable "aws_access_key" {
   type = string
 }
 
@@ -17,4 +17,4 @@ variable "aws_region" {
 
 variable "aws_role_arn" {
   type = string
-}
+} */
