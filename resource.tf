@@ -44,3 +44,58 @@ module "s3_artifact" {
   source = "./s3"
   bucket_name = "${local.environment}-shrade"
 }
+
+data "aws_caller_identity" "current" {}
+
+resource "aws_iam_policy" "shrade_ecr" {
+  name = "shrade_ecr"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid = "VisualEditor0",
+        Action = [
+                "ecr:CreateRepository",
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:ListImages",
+                "ecr:DescribeRepositories",
+                "ecr:DescribeImages",
+                "ecr:GetRepositoryPolicy",
+                "ecr:SetRepositoryPolicy",
+                "ecr:DeleteRepositoryPolicy",
+                "ecr:TagResource",
+                "ecr:UntagResource",
+                "ecr:BatchGetImage"
+            ]
+        Effect = "Allow"
+        Resource = [
+          "arn:aws:ecr:ap-southeast-1:${data.aws_caller_identity.current.account_id}:repository/shrade*"
+        ]
+      },
+      {
+        Sid = "VisualEditor1"
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_user" "shrade_ecr" {
+  name = "shrade_ecr"
+}
+
+resource "aws_iam_user_policy_attachment" "data_titan_ecr_attach" {
+  user       = aws_iam_user.shrade_ecr.name
+  policy_arn = aws_iam_policy.shrade_ecr.arn
+}
