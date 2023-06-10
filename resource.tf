@@ -111,7 +111,7 @@ resource "aws_iam_user_policy_attachment" "data_titan_ecr_attach" {
 }
 
 resource "aws_instance" "shrade_ec2" {
-  ami           = "ami-0c94855ba95c71c99"
+  ami           = "ami-067d12e172891a3e4"
   instance_type = "t2.micro" 
   tags = {
     Name = "shrade_ec2"
