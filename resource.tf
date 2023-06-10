@@ -134,3 +134,21 @@ resource "aws_instance" "shrade_ec2" {
     Name = "shrade_ec2"
   }
 }
+
+resource "aws_iam_role" "eks_cluster_role" {
+  name = "shrade=eks"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "eks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
