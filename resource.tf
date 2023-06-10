@@ -60,7 +60,7 @@ resource "aws_subnet" "private" {
   cidr_block        = local.subnets_public_private[1][count.index]
   availability_zone = data.aws_availability_zones.this.names[count.index]
   tags = {
-    Name = "private"
+    Name = "private-${count.index + 1}"
   }
 }
 
