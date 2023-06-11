@@ -129,14 +129,14 @@ resource "aws_instance" "shrade_ec2" {
   instance_type = "t2.micro" 
 
   vpc_security_group_ids = [aws_security_group.this.id]
-  subnet_id = "subnet-0b6155ee14a343d8f"
+  subnet_id = element(aws_subnet.private.*.id,0)
   tags = {
     Name = "shrade_ec2"
   }
 }
 
 resource "aws_iam_role" "eks_cluster_role" {
-  name = "shrade=eks"
+  name = "shrade-eks"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
